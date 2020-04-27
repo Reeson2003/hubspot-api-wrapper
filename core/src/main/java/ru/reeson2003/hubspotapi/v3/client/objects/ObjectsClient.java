@@ -3,11 +3,12 @@ package ru.reeson2003.hubspotapi.v3.client.objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ru.reeson2003.hubspotapi.v3.ApiClient;
-import ru.reeson2003.hubspotapi.v3.client.PropertyContainer;
-import ru.reeson2003.hubspotapi.v3.model.properties.Property;
-import ru.reeson2003.hubspotapi.v3.model.properties.PropertyGroup;
-import ru.reeson2003.hubspotapi.v3.model.types.HubSpotObjectType;
-import ru.reeson2003.hubspotapi.v3.operations.CrudOperations;
+import ru.reeson2003.hubspotapi.v3.client.ObjectType;
+import ru.reeson2003.hubspotapi.v3.client.objects.model.properties.Property;
+import ru.reeson2003.hubspotapi.v3.client.objects.model.properties.PropertyGroup;
+import ru.reeson2003.hubspotapi.v3.client.objects.model.properties.PropertyGroupObjectType;
+import ru.reeson2003.hubspotapi.v3.client.objects.model.properties.PropertyObjectType;
+import ru.reeson2003.hubspotapi.v3.client.operations.CrudOperations;
 
 @AllArgsConstructor
 public class ObjectsClient<T>
@@ -23,7 +24,7 @@ public class ObjectsClient<T>
     private final ApiClient apiClient;
 
     @Getter
-    private final HubSpotObjectType<T> objectType;
+    private final ObjectType<T> objectType;
 
     @Getter
     private final String baseUrl;
@@ -34,7 +35,7 @@ public class ObjectsClient<T>
     @Getter
     private final CrudOperations<PropertyGroup> propertyGroupClient;
 
-    private ObjectsClient(ApiClient apiClient, HubSpotObjectType<T> objectType, String baseUrl) {
+    private ObjectsClient(ApiClient apiClient, ObjectType<T> objectType, String baseUrl) {
         this(apiClient, objectType, baseUrl, null, null);
     }
 
@@ -43,10 +44,10 @@ public class ObjectsClient<T>
              hubSpotObjectType,
              OBJECT_URL.replace("{objectType}", hubSpotObjectType.getApiName()),
              new ObjectsClient<>(apiClient,
-                                 HubSpotObjectType.of(Property.class),
+                                 new PropertyObjectType(),
                                  PROPS_URL.replace("{objectType}", hubSpotObjectType.getApiName())),
              new ObjectsClient<>(apiClient,
-                                 HubSpotObjectType.of(PropertyGroup.class),
+                                 new PropertyGroupObjectType(),
                                  PROP_GROUPS_URL.replace("{objectType}", hubSpotObjectType.getApiName())));
     }
 

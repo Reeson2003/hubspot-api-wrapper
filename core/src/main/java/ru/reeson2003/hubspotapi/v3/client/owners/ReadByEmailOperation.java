@@ -1,6 +1,6 @@
 package ru.reeson2003.hubspotapi.v3.client.owners;
 
-import ru.reeson2003.hubspotapi.v3.operations.Operation;
+import ru.reeson2003.hubspotapi.v3.client.operations.Operation;
 
 import java.util.List;
 

@@ -3,9 +3,10 @@ package ru.reeson2003.hubspotapi.v3.client.owners;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.reeson2003.hubspotapi.v3.ApiClient;
-import ru.reeson2003.hubspotapi.v3.model.owners.Owner;
-import ru.reeson2003.hubspotapi.v3.model.types.HubSpotObjectType;
-import ru.reeson2003.hubspotapi.v3.operations.ReadOperations;
+import ru.reeson2003.hubspotapi.v3.client.ObjectType;
+import ru.reeson2003.hubspotapi.v3.client.operations.ReadOperations;
+import ru.reeson2003.hubspotapi.v3.client.owners.model.Owner;
+import ru.reeson2003.hubspotapi.v3.client.owners.model.OwnerObjectType;
 
 @Getter
 @RequiredArgsConstructor
@@ -17,12 +18,12 @@ public class OwnersClient
 
     private final String baseUrl;
 
-    private final HubSpotObjectType<Owner> objectType;
+    private final ObjectType<Owner> objectType;
 
     private final ApiClient apiClient;
 
     public OwnersClient(ApiClient apiClient) {
-        this(OWNERS_URL, HubSpotObjectType.of(Owner.class), apiClient);
+        this(OWNERS_URL, new OwnerObjectType(), apiClient);
     }
 
 }
