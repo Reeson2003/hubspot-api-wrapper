@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'io.freefair.lombok' version '5.0.0'
+    id 'maven-publish'
 }
 
 allprojects {
@@ -16,7 +17,34 @@ allprojects {
         mavenCentral()
     }
 
+    dependencies {
+        testImplementation 'org.mockito:mockito-core:2+'
+        testImplementation 'org.junit.jupiter:junit-jupiter:5+'
+        testImplementation 'org.assertj:assertj-core:3+'
+    }
+
     test {
         useJUnitPlatform()
+    }
+}
+
+subprojects {
+    apply plugin: "maven-publish"
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/Reeson2003/hubspot-api-wrapper")
+                credentials {
+                    username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                    password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
+        publications {
+            gpr(MavenPublication) {
+                from(components.java)
+            }
+        }
     }
 }
