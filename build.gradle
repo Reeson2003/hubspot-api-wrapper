@@ -10,7 +10,7 @@ allprojects {
     apply plugin: 'io.freefair.lombok'
 
     group = 'ru.reeson2003'
-    version = '0.0.1-SNAPSHOT'
+    version = '0.0.1'
     sourceCompatibility = '1.8'
 
     repositories {
@@ -43,8 +43,10 @@ subprojects {
         }
         publications {
             gpr(MavenPublication) {
-                from(components.java)
+                from project.components.java
             }
         }
     }
 }
+
+jar.enabled = false
