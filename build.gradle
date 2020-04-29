@@ -43,7 +43,7 @@ subprojects {
         }
         publications {
             gpr(MavenPublication) {
-                from(components.java)
+                from project.components.java
             }
         }
     }
