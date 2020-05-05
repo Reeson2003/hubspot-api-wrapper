@@ -1,7 +1,8 @@
-package ru.reeson2003.hubspotapi.v3.springimpl;
+package ru.reeson2003.hubspotapi.v3.client;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.reeson2003.hubspotapi.v3.ApacheApiClient;
 import ru.reeson2003.hubspotapi.v3.client.objects.ObjectsClient;
 import ru.reeson2003.hubspotapi.v3.client.objects.model.objects.Contact;
 import ru.reeson2003.hubspotapi.v3.client.objects.model.objects.ContactObjectType;
@@ -14,7 +15,7 @@ class ContactsClientTest {
 
     @BeforeAll
     public static void setup() {
-        client = new ObjectsClient<>(new HapiKeyApiClient("demo"), new ContactObjectType());
+        client = new ObjectsClient<>(new ApacheApiClient("demo"), new ContactObjectType());
     }
 
     @Test
