@@ -1,4 +1,3 @@
 rootProject.name = 'hubspot-api'
-include 'hubspot-api-spring'
 include 'hubspot-api-core'
 

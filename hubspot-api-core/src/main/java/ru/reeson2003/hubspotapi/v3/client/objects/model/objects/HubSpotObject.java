@@ -19,16 +19,16 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class HubSpotObject {
 
-    public String id;
+    private String id;
 
-    public String createdAt;
+    private String createdAt;
 
-    public String updatedAt;
+    private String updatedAt;
 
-    public Boolean archived;
+    private Boolean archived;
 
     @JsonProperty("properties")
     @Singular
-    public Map<String, String> properties;
+    private Map<String, String> properties;
 
 }
