@@ -22,6 +22,12 @@ public interface ReadAllOperation<T>
 
     default Results<T> readAll(int limit, String after) {
         String method = "GET";
+        String url = createUrl(limit, after);
+        ObjectType<T> objectType = getObjectType();
+        return getApiClient().exchange(url, method, null, objectType.getResultsType());
+    }
+
+    default String createUrl(int limit, String after) {
         String url = getBaseUrl();
         if (0 < limit || (null != after && !after.trim().isEmpty())) {
             StringBuilder sb = new StringBuilder(url).append("?");
@@ -34,10 +40,18 @@ public interface ReadAllOperation<T>
                   .append("after=")
                   .append(after);
             }
+            String parameters;
+            if (!(parameters = getParameters()).isEmpty()) {
+                sb.append("&")
+                  .append(parameters);
+            }
             url = sb.toString();
         }
-        ObjectType<T> objectType = getObjectType();
-        return getApiClient().exchange(url, method, null, objectType.getResultsType());
+        return url;
+    }
+
+    default String getParameters() {
+        return "";
     }
 
     @Override
